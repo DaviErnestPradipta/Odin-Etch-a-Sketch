@@ -1,4 +1,11 @@
-function createGrid(sideLength, colorMode) {
+function updateGrid() {
+    const sideLength = Number(slider.value)
+    const colorMode = colorModeCheckbox.checked
+    const opacityMode = opacityModeCheckbox.checked
+    createGrid(sideLength, colorMode, opacityMode)
+}
+
+function createGrid(sideLength, colorMode, opacityMode) {
     const container = document.querySelector(".container")
 
     // Clear previous squares
@@ -19,17 +26,14 @@ function createGrid(sideLength, colorMode) {
             if (colorMode) {
                 square.style.backgroundColor = getRandomColor()
             }
+            else if (opacityMode) {
+                square.style.backgroundColor = "red"
+            }
             else {
                 square.style.backgroundColor = "black"
             }
         })
     }
-}
-
-function updateGrid() {
-    const sideLength = Number(slider.value)
-    const colorMode = colorModeCheckbox.checked
-    createGrid(sideLength, colorMode)
 }
 
 function getRandomColor() {
@@ -42,9 +46,26 @@ function getRandomColor() {
 }
 
 const colorModeCheckbox = document.getElementById("colorMode")
-const slider = document.getElementById("gridSize")
+const opacityModeCheckbox = document.getElementById("opacityMode")
 const gridValue = document.getElementById("gridValue")
+const slider = document.getElementById("gridSize")
 const reloadButton = document.getElementById("reloadButton")
+
+//Update grid and toggle behavior on Color Mode checkbox
+colorModeCheckbox.addEventListener("change", () => {
+    if (colorMode) {
+        opacityModeCheckbox.checked = false
+    }
+    updateGrid()
+})
+
+//Update grid and toggle behavior on Opacity Mode checkbox
+opacityModeCheckbox.addEventListener("change", () => {
+    if (opacityMode) {
+        colorModeCheckbox.checked = false
+    }
+    updateGrid()
+})
 
 //Update label to show current value
 slider.addEventListener("input", () => {
@@ -53,6 +74,5 @@ slider.addEventListener("input", () => {
 })
 
 reloadButton.addEventListener("click", updateGrid)
-colorModeCheckbox.addEventListener("change", updateGrid)
 
-createGrid(16, colorModeCheckbox.checked)
+createGrid(16, colorModeCheckbox.checked, opacityModeCheckbox.checked)
