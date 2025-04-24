@@ -110,10 +110,11 @@ button:hover {
 }
 
 .container {
-    width: 75vw;
-    height: 75vw;
+    width: min(75vw, 75vh);
+    height: min(75vw, 75vh);
     border: 5px solid black;
     display: grid;
+    flex-grow: 0;
 }
 
 .square {
