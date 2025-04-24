@@ -39,7 +39,10 @@ function createGrid(sideLength, colorMode, eraserMode, opacityMode) {
                 square.style.backgroundColor = `rgb(${newRgb.join(",")})`
             }
             else {
-                square.style.backgroundColor = "black"
+                if (!square.style.backgroundColor) {
+                    square.style.backgroundColor = "black"
+                }
+                
             }
         })
     }
