@@ -1,11 +1,12 @@
 function updateGrid() {
     const sideLength = Number(slider.value)
     const colorMode = colorModeCheckbox.checked
+    const eraserMode = eraserModeCheckbox.checked
     const opacityMode = opacityModeCheckbox.checked
     createGrid(sideLength, colorMode, opacityMode)
 }
 
-function createGrid(sideLength, colorMode, opacityMode) {
+function createGrid(sideLength, colorMode, eraserMode, opacityMode) {
     const container = document.querySelector(".container")
 
     // Clear previous squares
@@ -27,6 +28,9 @@ function createGrid(sideLength, colorMode, opacityMode) {
                 if (!square.style.backgroundColor) {
                     square.style.backgroundColor = getRandomColor()
                 }
+            }
+            else if (eraserModeCheckbox.checked) {
+                square.style.backgroundColor = ""
             }
             else if (opacityModeCheckbox.checked) {
                 let currentColor = window.getComputedStyle(square).backgroundColor
@@ -51,6 +55,7 @@ function getRandomColor() {
 }
 
 const colorModeCheckbox = document.getElementById("colorMode")
+const eraserModeCheckbox = document.getElementById("eraserMode")
 const opacityModeCheckbox = document.getElementById("opacityMode")
 const gridValue = document.getElementById("gridValue")
 const slider = document.getElementById("gridSize")
@@ -59,23 +64,29 @@ const reloadButton = document.getElementById("reloadButton")
 //Update grid and toggle behavior on Color Mode checkbox
 colorModeCheckbox.addEventListener("change", () => {
     if (colorMode) {
+        eraserModeCheckbox.checked = false
         opacityModeCheckbox.checked = false
     }
-    updateGrid()
+})
+
+eraserModeCheckbox.addEventListener("change", () => {
+    if (eraserMode) {
+        colorModeCheckbox.checked = false
+        opacityModeCheckbox.checked = false
+    }
 })
 
 //Update grid and toggle behavior on Opacity Mode checkbox
 opacityModeCheckbox.addEventListener("change", () => {
     if (opacityMode) {
         colorModeCheckbox.checked = false
+        eraserModeCheckbox.checked = false
     }
-    updateGrid()
 })
 
 //Update label to show current value
 slider.addEventListener("input", () => {
     gridValue.textContent = `${slider.value} × ${slider.value}`
-    updateGrid()
 })
 
 reloadButton.addEventListener("click", updateGrid)
