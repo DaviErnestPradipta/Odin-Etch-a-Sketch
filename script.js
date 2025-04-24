@@ -61,8 +61,8 @@ const gridValue = document.getElementById("gridValue")
 const slider = document.getElementById("gridSize")
 const reloadButton = document.getElementById("reloadButton")
 
+//Enable exclusive checkbox
 const checkboxes = [colorModeCheckbox, eraserModeCheckbox, opacityModeCheckbox]
-
 checkboxes.forEach(currentCheckbox => {
     currentCheckbox.addEventListener("change", () => {
         if (currentCheckbox.checked) {
