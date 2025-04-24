@@ -15,10 +15,95 @@ body {
     margin-bottom: 10px;
 }
 
+.mode-options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+}
+
+/* Beautify checkboxes */
+input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: all 0.25s;
+}
+
+input[type="checkbox"]:hover {
+    animation: pulseGreen 0.5s infinite alternate;
+}
+
+@keyframes pulseGreen {
+    from {
+        background-color: white;
+    }
+    to {
+        background-color: lightgreen;
+    }
+}
+
+/* Checked state */
+input[type="checkbox"]:checked {
+    background-color: lightgreen;
+}
+
+/* Beautify slider track */
+input[type="range"] {
+    appearance: none;
+    width: 150px;
+    height: 5px;
+    background: gray;
+    border-radius: 5px;
+}
+
+/* Beautify slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: lightgreen;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+input[type="range"]::-moz-range-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: lightgreen;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+/* Beautify button */ 
+button {
+    padding: 5px 10px;
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+button:hover {
+    background-color: lightgreen;
+}
+
 .container {
     width: 960px;
     height: 960px;
-    border: 10px solid black;
+    border: 5px solid black;
     display: grid;
 }
 

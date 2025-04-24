@@ -23,11 +23,14 @@ function createGrid(sideLength, colorMode, opacityMode) {
 
         //Hover effect
         square.addEventListener("mouseover", () => {
-            if (colorMode) {
+            if (colorModeCheckbox.checked) {
                 square.style.backgroundColor = getRandomColor()
             }
-            else if (opacityMode) {
-                square.style.backgroundColor = "red"
+            else if (opacityModeCheckbox.checked) {
+                let currentColor = window.getComputedStyle(square).backgroundColor
+                let rgb = currentColor.match(/\d+/g).map(Number)
+                let newRgb = rgb.map(value => Math.max(0, value - 255 / 10))
+                square.style.backgroundColor = `rgb(${newRgb.join(",")})`
             }
             else {
                 square.style.backgroundColor = "black"
