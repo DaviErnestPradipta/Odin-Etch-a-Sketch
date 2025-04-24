@@ -61,27 +61,18 @@ const gridValue = document.getElementById("gridValue")
 const slider = document.getElementById("gridSize")
 const reloadButton = document.getElementById("reloadButton")
 
-//Update grid and toggle behavior on Color Mode checkbox
-colorModeCheckbox.addEventListener("change", () => {
-    if (colorMode) {
-        eraserModeCheckbox.checked = false
-        opacityModeCheckbox.checked = false
-    }
-})
+const checkboxes = [colorModeCheckbox, eraserModeCheckbox, opacityModeCheckbox]
 
-eraserModeCheckbox.addEventListener("change", () => {
-    if (eraserMode) {
-        colorModeCheckbox.checked = false
-        opacityModeCheckbox.checked = false
-    }
-})
-
-//Update grid and toggle behavior on Opacity Mode checkbox
-opacityModeCheckbox.addEventListener("change", () => {
-    if (opacityMode) {
-        colorModeCheckbox.checked = false
-        eraserModeCheckbox.checked = false
-    }
+checkboxes.forEach(currentCheckbox => {
+    currentCheckbox.addEventListener("change", () => {
+        if (currentCheckbox.checked) {
+            checkboxes.forEach(box => {
+                if (box !== currentCheckbox) {
+                    box.checked = false
+                }
+            })
+        }
+    })
 })
 
 //Update label to show current value
