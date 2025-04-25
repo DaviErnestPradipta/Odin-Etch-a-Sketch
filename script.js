@@ -1,88 +1,84 @@
 function updateGrid() {
-    const sideLength = Number(slider.value)
-    const colorMode = colorModeCheckbox.checked
-    const eraserMode = eraserModeCheckbox.checked
-    const opacityMode = opacityModeCheckbox.checked
-    createGrid(sideLength, colorMode, opacityMode)
+    createGrid(Number(slider.value));
 }
 
-function createGrid(sideLength, colorMode, eraserMode, opacityMode) {
-    const container = document.querySelector(".container")
+function createGrid(sideLength) {
+    const container = document.querySelector(".container");
 
-    // Clear previous squares
-    container.innerHTML = ""
+    // Clear previous squares and set grid template
+    container.innerHTML = "";
+    container.style.gridTemplateColumns = container.style.gridTemplateRows = `repeat(${sideLength}, 1fr)`;
 
-    //Set grid template
-    container.style.gridTemplateColumns = `repeat(${sideLength}, 1fr)`
-    container.style.gridTemplateRows = `repeat(${sideLength}, 1fr)`
+    // Create squares
+    Array.from({ length: sideLength * sideLength }).forEach(() => {
+        const square = document.createElement("div");
+        square.classList.add("square");
+        square.addEventListener("mouseover", () => handleHover(square));
+        container.appendChild(square);
+    });
+}
 
-    const totalSquares = sideLength * sideLength
-    for (let i = 0; i < totalSquares; i++) {
-        const square = document.createElement("div")
-        square.classList.add("square")
-        container.appendChild(square)
+function handleHover(square) {
+    const modeHandlers = {
+        colorMode: () => applyStyle(square, getRandomColor()),
+        eraserMode: () => applyStyle(square, null),
+        opacityMode: () => applyOpacity(square),
+        default: () => applyStyle(square, "black"),
+    };
 
-        //Hover effect
-        square.addEventListener("mouseover", () => {
-            if (colorModeCheckbox.checked) {
-                if (!square.style.backgroundColor) {
-                    square.style.backgroundColor = getRandomColor()
-                }
-            }
-            else if (eraserModeCheckbox.checked) {
-                square.style.backgroundColor = ""
-            }
-            else if (opacityModeCheckbox.checked) {
-                let currentColor = window.getComputedStyle(square).backgroundColor
-                let rgb = currentColor.match(/\d+/g).map(Number)
-                let newRgb = rgb.map(value => Math.max(0, value - 255 / 10))
-                square.style.backgroundColor = `rgb(${newRgb.join(",")})`
-            }
-            else {
-                if (!square.style.backgroundColor) {
-                    square.style.backgroundColor = "black"
-                }
-                
-            }
-        })
-    }
+    (modeHandlers[getActiveMode()] || modeHandlers.default)();
+}
+
+function applyStyle(square, color) {
+    square.style.backgroundColor = color ?? ""; // Clear color if null
+}
+
+function applyOpacity(square) {
+    const rgb = getRgbValues(square.style.backgroundColor || "rgb(255, 255, 255)");
+    const newRgb = rgb.map(value => Math.max(0, value - 255 / 10));
+    square.style.backgroundColor = `rgb(${newRgb.join(",")})`;
+}
+
+function getRgbValues(color) {
+    return color.match(/\d+/g)?.map(Number) || [255, 255, 255];
 }
 
 function getRandomColor() {
-    const letters = "0123456789ABCDEF"
-    let color = "#"
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)]
-    }
-    return color
+    return `#${Array.from({ length: 6 }, () => Math.floor(Math.random() * 16).toString(16)).join("")}`;
 }
 
-const colorModeCheckbox = document.getElementById("colorMode")
-const eraserModeCheckbox = document.getElementById("eraserMode")
-const opacityModeCheckbox = document.getElementById("opacityMode")
-const gridValue = document.getElementById("gridValue")
-const slider = document.getElementById("gridSize")
-const reloadButton = document.getElementById("reloadButton")
+function getActiveMode() {
+    return modeCheckboxes.find(cb => cb.checked)?.id || "default";
+}
 
-//Enable exclusive checkbox
-const checkboxes = [colorModeCheckbox, eraserModeCheckbox, opacityModeCheckbox]
-checkboxes.forEach(currentCheckbox => {
-    currentCheckbox.addEventListener("change", () => {
-        if (currentCheckbox.checked) {
-            checkboxes.forEach(box => {
-                if (box !== currentCheckbox) {
-                    box.checked = false
-                }
-            })
-        }
-    })
-})
+function setupExclusiveCheckboxes(checkboxes) {
+    checkboxes.forEach(currentCheckbox => {
+        currentCheckbox.addEventListener("change", () => {
+            if (currentCheckbox.checked) {
+                checkboxes.forEach(box => (box.checked = box === currentCheckbox));
+            }
+        });
+    });
+}
 
-//Update label to show current value
-slider.addEventListener("input", () => {
-    gridValue.textContent = `${slider.value} × ${slider.value}`
-})
+function setupSlider() {
+    slider.addEventListener("input", () => {
+        gridValue.textContent = `${slider.value} × ${slider.value}`;
+    });
+}
 
-reloadButton.addEventListener("click", updateGrid)
+// DOM Elements
+const modeCheckboxes = [
+    document.getElementById("colorMode"),
+    document.getElementById("eraserMode"),
+    document.getElementById("opacityMode"),
+];
+const gridValue = document.getElementById("gridValue");
+const slider = document.getElementById("gridSize");
+const reloadButton = document.getElementById("reloadButton");
 
-createGrid(16, colorModeCheckbox.checked, opacityModeCheckbox.checked)
+// Initialize
+setupExclusiveCheckboxes(modeCheckboxes);
+setupSlider();
+reloadButton.addEventListener("click", updateGrid);
+createGrid(16);
