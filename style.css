@@ -47,7 +47,7 @@ input[type="radio"] {
     transition: all 0.25s;
 }
 
-input[type="checkbox"]:hover {
+input[type="radio"]:hover {
     animation: pulseGreen 0.5s infinite alternate;
 }
 
