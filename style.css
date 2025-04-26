@@ -1,5 +1,31 @@
 * {
     font-family: "Courier New", monospace;
+    font-size: 1rem;
+
+    --distance: 0.5rem;
+    --double-distance: calc(var(--distance) * 2);
+
+    --border: 0.125vh solid black;
+    --thick-border: 0.5vh solid black;
+
+    --squircle: 1vh;
+    --round: 50%;
+    
+    --animation: pulseGreen 0.5s infinite alternate;
+    --transition: all 0.25s ease;
+
+    --main-color: lightgreen;
+    --secondary-color: white;
+    --third-color: grey;
+    --fourth-color: black;
+    
+    --slider-track-width: 15vh;
+    --slider-track-height: 0.5vh;
+    --slider-thumb-diameter: 1vh;
+
+    --button-padding: 0.5vh 1vh;
+
+    --container-size: 75vmin;
 }
 
 html, body {
@@ -20,8 +46,8 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    gap: 1vh;
-    margin-bottom: 1vh;
+    gap: var(--distance);
+    margin-bottom: var(--distance);
 }
 
 .mode-options {
@@ -29,7 +55,7 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 1vh;
+    gap: var(--distance);
 }
 
 label {
@@ -39,85 +65,79 @@ label {
 
 input[type="radio"] {
     appearance: none;
-    width: 2vh;
-    height: 2vh;
-    border: 0.125vh solid black;
-    border-radius: 50%;
-    margin-right: 1vh;
-    transition: all 0.25s;
+    width: var(--double-distance);
+    height: var(--double-distance);
+    border: var(--border);
+    border-radius: var(--round);
+    margin-right: var(--distance);
+    transition: var(--transition);
 }
 
 input[type="radio"]:hover {
-    animation: pulseGreen 0.5s infinite alternate;
+    animation: var(--animation);
 }
 
 @keyframes pulseGreen {
     from {
-        background-color: white;
+        background-color: var(--secondary-color);
     }
     to {
-        background-color: lightgreen;
+        background-color: var(--main-color);
     }
 }
 
-/* Checked state */
 input[type="radio"]:checked {
-    background-color: lightgreen;
+    background-color: var(--main-color);
 }
 
-/* Beautify slider track */
 input[type="range"] {
     appearance: none;
-    width: 15vh;
-    height: 0.5vh;
-    background: gray;
-    border-radius: 1vh;
+    width: var(--slider-track-width);
+    height: var(--slider-track-height);
+    background: var(--third-color);
 }
 
-/* Beautify slider thumb */
 input[type="range"]::-webkit-slider-thumb {
     appearance: none;
-    width: 1vh;
-    height: 1vh;
-    background: lightgreen;
-    border: 0.125vh solid black;
-    border-radius: 50%;
+    width: var(--slider-thumb-diameter);
+    height: var(--slider-thumb-diameter);
+    background: var(--main-color);
+    border: var(--border);
+    border-radius: var(--round);
 }
 
 input[type="range"]::-moz-range-thumb {
     appearance: none;
-    width: 1vh;
-    height: 1vh;
-    background: lightgreen;
-    border: 0.125vh solid black;
-    border-radius: 50%;
+    width: var(--slider-thumb-diameter);
+    height: var(--slider-thumb-diameter);
+    background: var(--main-color);
+    border: var(--border);
+    border-radius: var(--round);
 }
 
-/* Beautify button */ 
 button {
-    padding: 0.5vh 1vh;
-    font-size: 2vh;
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-    border-radius: 1vh;
-    transition: all 0.25s ease;
+    padding: var(--button-padding);
+    background-color: var(--secondary-color);
+    color: var(--fourth-color);
+    border: var(--border);
+    border-radius: var(--squircle);
+    transition: var(--transition);
 }
 
 button:hover {
-    background-color: lightgreen;
+    background-color: var(--main-color);
 }
 
 .container {
-    width: min(75vw, 75vh);
-    height: min(75vw, 75vh);
-    border: 0.5vh solid black;
+    width: var(--container-size);
+    height: var(--container-size);
+    border: var(--thick-border);
     display: grid;
     flex-grow: 0;
 }
 
 .square {
     box-sizing: border-box;
-    border: 0.125vh solid black;
-    background-color: white;
+    border: var(--border);
+    background-color: var(--secondary-color);
 }
