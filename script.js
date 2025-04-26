@@ -40,7 +40,7 @@ function applyOpacity(square) {
 }
 
 function getRgbValues(color) {
-    return color.match(/\d+/g)?.map(Number) || [255, 255, 255];
+    return color.match(/\d+/g)?.map(Number) || [0, 0, 0];
 }
 
 function getRandomColor() {
