@@ -20,8 +20,8 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 1vh;
+    margin-bottom: 1vh;
 }
 
 .mode-options {
@@ -29,7 +29,7 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 10px;
+    gap: 1vh;
 }
 
 label {
@@ -40,11 +40,11 @@ label {
 /* Beautify checkboxes */
 input[type="checkbox"] {
     appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin-right: 10px;
+    width: 2vh;
+    height: 2vh;
+    border: 0.125vh solid black;
+    border-radius: 0.5vh;
+    margin-right: 1vh;
     transition: all 0.25s;
 }
 
@@ -69,39 +69,39 @@ input[type="checkbox"]:checked {
 /* Beautify slider track */
 input[type="range"] {
     appearance: none;
-    width: 150px;
-    height: 5px;
+    width: 15vh;
+    height: 0.5vh;
     background: gray;
-    border-radius: 5px;
+    border-radius: 1vh;
 }
 
 /* Beautify slider thumb */
 input[type="range"]::-webkit-slider-thumb {
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 1vh;
+    height: 1vh;
     background: lightgreen;
-    border: 1px solid black;
+    border: 0.125vh solid black;
     border-radius: 50%;
 }
 
 input[type="range"]::-moz-range-thumb {
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 1vh;
+    height: 1vh;
     background: lightgreen;
-    border: 1px solid black;
+    border: 0.125vh solid black;
     border-radius: 50%;
 }
 
 /* Beautify button */ 
 button {
-    padding: 5px 10px;
-    font-size: 20px;
+    padding: 0.5vh 1vh;
+    font-size: 2vh;
     background-color: white;
     color: black;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 1vh;
     transition: all 0.25s ease;
 }
 
@@ -112,13 +112,13 @@ button:hover {
 .container {
     width: min(75vw, 75vh);
     height: min(75vw, 75vh);
-    border: 5px solid black;
+    border: 0.5vh solid black;
     display: grid;
     flex-grow: 0;
 }
 
 .square {
     box-sizing: border-box;
-    border: 1px solid black;
+    border: 0.125vh solid black;
     background-color: white;
 }
