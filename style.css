@@ -1,31 +1,24 @@
 * {
     font-family: "Courier New", monospace;
     font-size: 1rem;
-
+    --body-height: 100vh;
     --distance: 0.5rem;
     --double-distance: calc(var(--distance) * 2);
-
-    --border: 0.125vh solid black;
-    --thick-border: 0.5vh solid black;
-
-    --squircle: 1vh;
+    --border: 0.1rem solid black;
+    --thick-border: 0.25rem solid black;
+    --squircle: 0.5rem;
     --round: 50%;
-    
-    --animation: pulseGreen 0.5s infinite alternate;
+    --animation: pulse-green 0.5s infinite alternate;
     --transition: all 0.25s ease;
-
     --main-color: lightgreen;
     --secondary-color: white;
     --third-color: grey;
     --fourth-color: black;
-    
-    --slider-track-width: 15vh;
-    --slider-track-height: 0.5vh;
-    --slider-thumb-diameter: 1vh;
-
-    --button-padding: 0.5vh 1vh;
-
-    --container-size: 75vmin;
+    --slider-track-width: 10rem;
+    --slider-track-height: 0.25rem;
+    --slider-thumb-diameter: 0.75rem;
+    --button-padding: 0.25rem 0.5rem;
+    --container-size: 50rem;
 }
 
 html, body {
@@ -34,9 +27,9 @@ html, body {
 }
 
 body {
+    height: var(--body-height);
     display: flex;
     flex-direction: column;
-    height: 100vh;
     justify-content: center;
     align-items: center;
 }
@@ -44,7 +37,6 @@ body {
 .control {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
     gap: var(--distance);
     margin-bottom: var(--distance);
@@ -53,14 +45,11 @@ body {
 .mode-options {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
     gap: var(--distance);
 }
 
 label {
     display: flex;
-    align-items: center;
 }
 
 input[type="radio"] {
@@ -69,15 +58,15 @@ input[type="radio"] {
     height: var(--double-distance);
     border: var(--border);
     border-radius: var(--round);
-    margin-right: var(--distance);
     transition: var(--transition);
+    margin-right: var(--distance);
 }
 
 input[type="radio"]:hover {
     animation: var(--animation);
 }
 
-@keyframes pulseGreen {
+@keyframes pulse-green {
     from {
         background-color: var(--secondary-color);
     }
