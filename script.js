@@ -48,17 +48,7 @@ function getRandomColor() {
 }
 
 function getActiveMode() {
-    return modeCheckboxes.find(cb => cb.checked)?.id || "default";
-}
-
-function setupExclusiveCheckboxes(checkboxes) {
-    checkboxes.forEach(currentCheckbox => {
-        currentCheckbox.addEventListener("change", () => {
-            if (currentCheckbox.checked) {
-                checkboxes.forEach(box => (box.checked = box === currentCheckbox));
-            }
-        });
-    });
+    return document.querySelector('input[name="mode"]:checked')?.id || "default";
 }
 
 function setupSlider() {
@@ -67,18 +57,10 @@ function setupSlider() {
     });
 }
 
-// DOM Elements
-const modeCheckboxes = [
-    document.getElementById("colorMode"),
-    document.getElementById("eraserMode"),
-    document.getElementById("opacityMode"),
-];
 const gridValue = document.getElementById("gridValue");
 const slider = document.getElementById("gridSize");
 const reloadButton = document.getElementById("reloadButton");
 
-// Initialize
-setupExclusiveCheckboxes(modeCheckboxes);
 setupSlider();
 reloadButton.addEventListener("click", updateGrid);
 createGrid(16);
